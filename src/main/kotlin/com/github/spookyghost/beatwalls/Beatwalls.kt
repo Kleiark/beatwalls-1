@@ -13,6 +13,7 @@ import reader.*
 import song.*
 import structures.WallStructureManager
 import java.io.File
+import kotlin.math.roundToInt
 import kotlin.system.exitProcess
 
 private val logger = KotlinLogging.logger {}
@@ -65,7 +66,6 @@ class Beatwalls : CliktCommand() {
                     val map = Song(file)
                     beatsPerMinute = bpm ?: map.info._beatsPerMinute
                     map.difficultyList.forEach {
-                        if (it.component1().containsCommand("bw"))
                             difficultyList += it.toPair()
                     }
                 }
@@ -85,76 +85,25 @@ class Beatwalls : CliktCommand() {
         }
 
 
+
         for (difficulty in difficultyList) {
-            logger.info { "\n\nWorking on File ${difficulty.component2()}\n" }
 
-            //print Stuf and warnings
-            println("keep old Files: $keepFiles")
-            println("dry run: $dryRun")
-            println("keep old Walls: $keepWalls")
-            if (!yes) {
-                println("continue? (y/n)")
-                if (readLine()?.toLowerCase() ?: "n" != "y") exitProcess(0)
+            val diff = difficulty.component1()
+            println("found difficulty ${diff._bookmarks}")
+            diff._bookmarks.forEach {
+                val a = it.getCommandList("SPLIT").first().scale.roundToInt()
+                println(  "Found BOOKMARK ${it._name} at ${it._time} with $a" )
+
             }
 
 
-            //clears the wall if the keepFileFlag is false
-            if (keepFiles) {
-                val bDiff = difficulty.component1().copy()
-                val bPath = File(difficulty.component2().toString() + ".old")
-                writeDifficulty(Pair(bDiff, bPath))
-                logger.info { "Written Backup to $bPath" }
-            }
 
 
-            //deletes the previous walls, if the keepWallsFlag is false
-            if (!keepWalls) {
-                difficulty.component1()._obstacles.clear()
-                logger.info { "cleared old Difficulty" }
-            }
 
 
-            //with each difficulty, add all walls
-            with(difficulty.component1()) {
-                for (bookmark in _bookmarks) {
-
-                    //find the right bpm
-                    val tempBpm =
-                        _BPMChanges.findLast { bpmChanges -> bpmChanges._time <= bookmark._time }?._BPM ?: beatsPerMinute
-
-                    //create an empty list of _obstacles, we will use
-                    val list = arrayListOf<_obstacles>()
-
-                    //put the offset in a variable
-                    val timeOffset = bookmark._time
-
-                    //implement the commandList
-                    val commandList = bookmark.getCommandList("/bw")
-
-                    //add the for each command to the obstacle list
-                    for (command in commandList) {
-                        list.addAll(WallStructureManager.get(command))
-                        WallCounter++
-                    }
-
-                    //adjust the bpm for each _obstacle
-                    for (obstacle in list) {
-                        obstacle.adjustBPM(beatsPerMinute, tempBpm, timeOffset)
-                        _obstacles.add(obstacle)
-                    }
-                }
-            }
-
-            //writes the difficulty
-            if (!dryRun) {
-                writeDifficulty(difficulty.toPair())
-                logger.info { "written new Difficulty" }
-            }
         }
 
         logger.info { "\nfinished run, written $WallCounter Wall Structures" }
-        println("press enter to exit")
-        readLine()
     }
 }
 
