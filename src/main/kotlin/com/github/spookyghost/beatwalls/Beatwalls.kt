@@ -13,7 +13,7 @@ import reader.*
 import song.*
 import structures.WallStructureManager
 import java.io.File
-import kotlin.math.roundToInt
+import java.nio.file.Paths
 import kotlin.system.exitProcess
 
 private val logger = KotlinLogging.logger {}
@@ -47,6 +47,7 @@ class Beatwalls : CliktCommand() {
     private var WallCounter = 0
     private var beatsPerMinute = 0.0
     private val difficultyList = mutableMapOf<Difficulty, File>()
+    lateinit var map:Song
 
     init {
         context {
@@ -63,10 +64,10 @@ class Beatwalls : CliktCommand() {
             when {
                 file.isSong() -> {
                     logger.info { "Detected song. Running the program through all Difficulties which have commands" }
-                    val map = Song(file)
+                    map = Song(file)
                     beatsPerMinute = bpm ?: map.info._beatsPerMinute
                     map.difficultyList.forEach {
-                            difficultyList += it.toPair()
+                        difficultyList += it.toPair()
                     }
                 }
                 file.isDifficulty() -> {
@@ -90,10 +91,35 @@ class Beatwalls : CliktCommand() {
 
             val diff = difficulty.component1()
             println("found difficulty ${diff._bookmarks}")
-            diff._bookmarks.forEach {
-                val a = it.getCommandList("SPLIT").first().scale.roundToInt()
-                println(  "Found BOOKMARK ${it._name} at ${it._time} with $a" )
+            for (_bookmarks in diff._bookmarks){
+                if (!_bookmarks._name.contains("SPLIT")) {
+                    continue
+                }
+                val a = _bookmarks.getCommandList("SPLIT").first().name.toInt()
+                println("Found BOOKMARK ${_bookmarks._name} at ${_bookmarks._time} with $a")
+                val tempBpm =diff._BPMChanges.findLast{ bpmChanges -> bpmChanges._time <= _bookmarks._time }?._BPM ?: beatsPerMinute
+                val tempDiff:Difficulty = diff.copy()
+                tempDiff._events.removeIf { it._time< _bookmarks._time }
+                tempDiff._obstacles.removeIf { it._time < _bookmarks._time }
+                tempDiff._notes.removeIf { it._time< _bookmarks._time }
 
+
+                tempDiff._events.forEach {
+                    it._time -= _bookmarks._time
+                    it.adjustBPM(beatsPerMinute,tempBpm,0.0) }
+                tempDiff._obstacles.forEach{
+                    it._time -= _bookmarks._time
+                    it.adjustBPM(beatsPerMinute,tempBpm,0.0)}
+                tempDiff._notes.forEach{
+                    it._time -= _bookmarks._time
+                    it.adjustBPM(beatsPerMinute,tempBpm,0.0)}
+
+                map.info._beatsPerMinute = tempBpm
+                map.info._songName = "Split $a"
+                map.info._difficultyBeatmapSets.first()._difficultyBeatmaps.first()._beatmapFilename = "Expert$a.dat"
+                val tempFile = Paths.get(file.toString(), "$a").toFile()
+                writeInfo(map.info,tempFile)
+                writeDifficulty(Pair(tempDiff,File(map.info._difficultyBeatmapSets.first()._difficultyBeatmaps.first()._beatmapFilename)))
             }
 
 
