@@ -367,15 +367,18 @@ class Wall: WallStructure() {
     var width = 0.0
 
     override fun run() {
-        add(SpookyWall(
-            startRow = startRow,
-            duration = duration,
-            width = width,
-            height = height,
-            startHeight = startHeight,
-            startTime = startTime
-        ))
+        add(
+            SpookyWall(
+                startRow = startRow,
+                duration = duration,
+                width = width,
+                height = height,
+                startHeight = startHeight,
+                startTime = startTime
+            )
+        )
     }
+}
 /**
  * Draws a wall of line between the 2 provided Points
  */
@@ -420,7 +423,7 @@ class ContinuesCurve : WallStructure(){
 
 fun main (){
     val w = CustomWallStructure("test1")
-    w.walls().add(Wall(1.1,1.1,1.1,1.1,1.1,1.1))
+    w.walls().add(SpookyWall(1.1,1.1,1.1,1.1,1.1,1.1))
     val w2 = w.deepCopy()
     w.walls().forEach { it.startRow+=2 }
     println(w.walls().first().startRow)
