@@ -2,16 +2,17 @@ package structure
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import song.Difficulty
-import song._BPMChanges
-import song._obstacles
+import difficulty.Difficulty
+import difficulty._BPMChanges
+import difficulty._customData
+import difficulty._obstacles
 import java.io.Serializable
 import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.random.Random
 
 
-data class Wall(
+data class SpookyWall(
     @Expose
     @SerializedName("startRow") var startRow: Double,
     @Expose
@@ -102,22 +103,22 @@ data class Wall(
     }
 
     fun adjustToBPM(baseBPM:Double,difficulty: Difficulty){
-        startTime = getTime(startTime,baseBPM,difficulty._BPMChanges)
+        startTime = getTime(startTime,baseBPM,difficulty._customData._BPMChanges)
         if(duration>0)
-            duration * multiplier(startTime,baseBPM,difficulty._BPMChanges)
+            duration * multiplier(startTime,baseBPM,difficulty._customData._BPMChanges)
 
     }
     fun fuckUp() =
-        Wall(ra(startRow), ra(duration), ra(width), ra(height), ra(startHeight), ra(startTime))
+        SpookyWall(ra(startRow), ra(duration), ra(width), ra(height), ra(startHeight), ra(startTime))
 
     fun ground(h:Double) =
-        Wall(startRow, duration, width, height + (startHeight - h), h, startTime)
+        SpookyWall(startRow, duration, width, height + (startHeight - h), h, startTime)
 
     fun sky(h:Double) =
-        Wall(startRow, duration, width, (h - startHeight), startHeight, startTime)
+        SpookyWall(startRow, duration, width, (h - startHeight), startHeight, startTime)
 
     fun extend(a:Double) =
-        Wall(startRow, a - startTime, width, height, startHeight, startTime)
+        SpookyWall(startRow, a - startTime, width, height, startHeight, startTime)
 
     private fun ra(i:Double) = i+Random.nextDouble(-0.2 ,0.2)
     fun fast() = this.copy(duration= -2.0)
@@ -158,15 +159,15 @@ data class Wall(
     fun time(a:Double) = this.copy(
         startTime = startTime+a
     )
-    fun repeat(a: Int, o: Double = 1.0): MutableList<Wall> {
-        val list = mutableListOf<Wall>()
+    fun repeat(a: Int, o: Double = 1.0): MutableList<SpookyWall> {
+        val list = mutableListOf<SpookyWall>()
         for (i in 0 until a){
             list.add(this.copy(startTime= this.startTime + i*o))
         }
         return list
     }
-    fun split(a: Int): MutableList<Wall> {
-        val list = mutableListOf<Wall>()
+    fun split(a: Int): MutableList<SpookyWall> {
+        val list = mutableListOf<SpookyWall>()
         for (i in 0 until a){
             if (this.height>this.width)
                 list.add(this.copy(startHeight = startHeight+height* i / a,height = 1.0/a))
@@ -178,7 +179,7 @@ data class Wall(
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is Wall) return false
+        if (other !is SpookyWall) return false
 
         if (startRow != other.startRow) return false
         if (duration != other.duration) return false
@@ -204,7 +205,7 @@ data class Wall(
 private fun getTime(beat:Double, baseBpm: Double, _BPMChanges: ArrayList<_BPMChanges>): Double {
     val lastChange = lastChange(beat, baseBpm, _BPMChanges)
     val offset = lastChange?.first?._time?:0.0
-    val time = beat- (lastChange?.second ?: 0.0) * multiplier(beat, baseBpm, _BPMChanges)
+    val time = (beat- (lastChange?.second ?: 0.0)) * multiplier(beat, baseBpm, _BPMChanges)
     return offset + time
 }
 private fun multiplier(beat:Double, baseBpm: Double, _BPMChanges: ArrayList<_BPMChanges>): Double {
@@ -212,7 +213,7 @@ private fun multiplier(beat:Double, baseBpm: Double, _BPMChanges: ArrayList<_BPM
 }
 private fun lastChange(beat:Double, baseBpm: Double, _BPMChanges: ArrayList<_BPMChanges>): Pair<_BPMChanges, Double>? {
     val l = _BPMChanges.map { it to getBPMchangeBeat(baseBpm,_BPMChanges,it) }
-    return l.sortedBy { it.second }.findLast {it.second < beat}
+    return l.sortedBy { it.second }.findLast {it.second <= beat}
 
 }
 
@@ -222,7 +223,7 @@ private fun getBPMchangeBeat(baseBpm:Double, _BPMChanges: ArrayList<_BPMChanges>
     var beat = 0.0
     val tempList = arrayListOf<_BPMChanges>()
     tempList.addAll(_BPMChanges)
-    tempList.add(0, _BPMChanges(baseBpm,0.0,4,4))
+    tempList.add(0, _BPMChanges(baseBpm, 0.0, 4, 4))
     while(tempList [index] != bpmChange) {
         val trueDuration = (tempList[index+1]._time - tempList[index]._time) * (tempList[index]._BPM/baseBpm)
         beat += (trueDuration)

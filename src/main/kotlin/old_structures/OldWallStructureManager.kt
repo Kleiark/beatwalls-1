@@ -2,8 +2,8 @@ package old_structures
 
 
 import mu.KotlinLogging
-import song.Difficulty
-import structure.Wall
+import difficulty.Difficulty
+import structure.SpookyWall
 
 private val logger = KotlinLogging.logger {}
 
@@ -11,7 +11,7 @@ object OldWallStructureManager
 {
     private val wallStructuresList = arrayListOf<OldWallStructure>()
 
-    lateinit var difficulty:Difficulty
+    lateinit var difficulty: Difficulty
 
     fun loadManager(list:ArrayList<CustomOldWallStructure>) {
         with(wallStructuresList){
@@ -22,10 +22,10 @@ object OldWallStructureManager
     }
 
 
-    fun getWallList(oldParameters: OldParameters): ArrayList<Wall> {
+    fun getWallList(oldParameters: OldParameters): ArrayList<SpookyWall> {
 
         //all the variables
-        val list = arrayListOf<Wall>()
+        val list = arrayListOf<SpookyWall>()
         val count = oldParameters.repeatCount
         val gap = oldParameters.repeatGap
 
@@ -43,7 +43,7 @@ object OldWallStructureManager
 
             //adds the mirrored list
             if (structure.mirror)
-                //wallList.addAll(wallList.map { it.mirror() })
+                //spookyWallList.addAll(spookyWallList.map { it.mirror() })
 
             //adds the temp list to our List
             list.addAll(wallList)

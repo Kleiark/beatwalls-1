@@ -36,17 +36,38 @@ fun parseAsset(s: String): ArrayList<WallStructure> {
 fun parseStructures(mutableList: MutableList<Pair<String, String>>): ArrayList<WallStructure>{
     val list = arrayListOf<WallStructure>()
 
+    var lastStruct: WallStructure = EmptyWallStructure
+    val definedStructures = mutableListOf<Define>()
+
     for (i in 0 until mutableList.size){
-        val definedStructures = list.filterIsInstance<Define>()
-        if (mutableList[i].key().toDoubleOrNull() != null){
+        //todo change regarding define
+        val key = mutableList[i].key().toLowerCase()
+        val value = mutableList[i].value()
+        if(key == "define"){
+            val struct = Define()
+            struct.name=value.toLowerCase()
+            definedStructures.add(struct)
+            logger.info { "defined Structure ${struct.name}" }
+            lastStruct = struct
+        }
+        if (key.toDoubleOrNull() != null){
+            if(value.toLowerCase() == "define")
+                errorExit { "Old Defined Structure detected. New one is define: \$name" }
             val structName = mutableList[i].value().toLowerCase()
             val beat = mutableList[i].key().toDouble()
             val struct: WallStructure = findStructure(structName, definedStructures)
-            //sets the beat
+
             struct.beat = beat
+
+            //hacky
+            if (struct is Define ){
+                struct.isTopLevel = true
+            }
+            logger.info { "adding $structName" }
             list.add(struct)
+            lastStruct = struct
         }else{
-            readWallStructOptions(list.last(), mutableList[i], definedStructures)
+            readWallStructOptions(lastStruct, mutableList[i], definedStructures)
         }
     }
     return list
@@ -57,18 +78,30 @@ fun findStructure(name: String, definedStructure: List<Define>): WallStructure {
     val specialStructs = WallStructure::class.sealedSubclasses
     val specialStructsNames = specialStructs.map { it.simpleName?.toLowerCase()?:""}
 
-    val definedStructureNames = definedStructure.map { it.name }
+    val definedStructureNames = definedStructure.map { it.name.toLowerCase() }
     val struct: WallStructure
+
     // sets the struct
     struct = when (structName) {
-        in definedStructureNames -> definedStructure.find { it.name.toLowerCase() == structName }!!.deepCopy()
-        in specialStructsNames -> specialStructs.find { it.simpleName!!.toLowerCase() == structName }!!.createInstance()
+        in definedStructureNames -> findDefinedStruct(structName,definedStructure)
+        in specialStructsNames -> findSpecialStruct(structName,specialStructs)
         else -> {
             logger.info { "structure $structName not found" }
             EmptyWallStructure
         }
     }
     return struct
+}
+
+fun findDefinedStruct(structName: String, definedStructure: List<Define>): Define {
+    val found = definedStructure.find { it.name.toLowerCase() == structName }!!.deepCopy()
+    val def = Define()
+    def.structures = listOf(found)
+    return def
+}
+
+fun findSpecialStruct(structName: String,specialStructs: List<KClass<out WallStructure>>): WallStructure {
+    return specialStructs.find { it.simpleName!!.toLowerCase() == structName }!!.createInstance()
 }
 
 /**
@@ -140,11 +173,13 @@ fun parseAssetString(s:String): MutableList<Pair<String, String>> =
     s
         .lines()
         .asSequence()
+        .map { it.trim() }
         .filterNot { it.startsWith("#") || it.isEmpty() }
         .map { it.replace("\\t".toRegex(), "") }
         .map { it.split(":") }
         .map { it.map { l -> l.trim() } }
         .map { it[0].toLowerCase() to it.minus(it[0]).joinToString(":") }
+        .filterNot{ it.first.isEmpty() || it.second.isEmpty()}
         .toMutableList()
 
 /**

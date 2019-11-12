@@ -1,9 +1,11 @@
-@file:Suppress("unused")
+@file:Suppress("unused", "MemberVisibilityCanBePrivate")
 
 package structure
 
 import mu.KotlinLogging
 import java.io.*
+import kotlin.math.max
+import kotlin.math.min
 import kotlin.random.Random
 
 
@@ -18,16 +20,22 @@ private val logger = KotlinLogging.logger {}
 sealed class WallStructure:Serializable
 {
     /**
-     * saved Walls
+     * dont touch
      */
-    private var walls: ArrayList<Wall> = arrayListOf()
+    internal var spookyWalls: ArrayList<SpookyWall> = arrayListOf()
     /**
-     * the Beat, dont change that, it will get overwritten anyway
+     * dont touch
      */
     var beat: Double = 0.0
 
+    //    ____  ___    _   ______  ____  __  ___   _____________  ______________
+    //   / __ \/   |  / | / / __ \/ __ \/  |/  /  / ___/_  __/ / / / ____/ ____/
+    //  / /_/ / /| | /  |/ / / / / / / / /|_/ /   \__ \ / / / / / / /_  / /_
+    // / _, _/ ___ |/ /|  / /_/ / /_/ / /  / /   ___/ // / / /_/ / __/ / __/
+    ///_/ |_/_/  |_/_/ |_/_____/\____/_/  /_/   /____//_/  \____/_/   /_/
+
     /**
-     * mirrors the Wall:
+     * mirrors the SpookyWall:
      *  0 -> dont mirror,
      *  1-> mirror to the other side,
      *  2-> mirror to the other side and duplicate,
@@ -41,14 +49,87 @@ sealed class WallStructure:Serializable
     var mirror: Int = 0
 
     /**
-     * times the Wall by adding the njsOffset
+     * times the SpookyWall by adding the njsOffset
      */
     var time: Boolean = false
 
-    /**
-     * changes the Duration to the given value
-     */
+    //    ___    ____      ____  _____________
+    //   /   |  / __ \    / / / / / ___/_  __/
+    //  / /| | / / / /_  / / / / /\__ \ / /
+    // / ___ |/ /_/ / /_/ / /_/ /___/ // /
+    ///_/  |_/_____/\____/\____//____//_/
+
+    //changing the Values
+    var changeStartTime: Double? = null
+
     var changeDuration: Double? = null
+
+    var changeHeight: Double? = null
+
+    var changeStartHeight: Double? = null
+
+    var changeStartRow: Double? = null
+
+    var changeWidth: Double? = null
+
+    // scaling the Values
+    var scaleStartTime: Double? = null
+
+    var scaleDuration: Double? = null
+
+    var scaleHeight: Double? = null
+
+    var scaleStartHeight: Double? = null
+
+    var scaleStartRow: Double? = null
+
+    var scaleWidth: Double? = null
+
+    // adding to the Values
+    var addStartTime: Double? = null
+
+    var addDuration: Double? = null
+
+    var addHeight: Double? = null
+
+    var addStartHeight: Double? = null
+
+    var addStartRow: Double? = null
+
+    var addWidth: Double? = null
+
+    // fits the height, adjust the correspongig value, that all wall have the same, given value
+    // (for example startheight 0 -> sets startheight to 0 and adjust the height, that the max height is the same
+    var fitStartTime: Double? = null
+
+    var fitDuration: Double? = null
+
+    var fitHeight: Double? = null
+
+    var fitStartHeight: Double? = null
+
+    var fitStartRow: Double? = null
+
+    var fitWidth: Double? = null
+
+    /**
+     * scales the Duration and startTime,
+     * does not scale the duration of negative walls
+     */
+    var scale: Double? = null
+
+    /**
+     * reverses the WallStructure
+     */
+    var reverse: Boolean? = null
+
+    //todo fit to
+
+    //    ____  __________  _________  ______
+    //   / __ \/ ____/ __ \/ ____/   |/_  __/
+    //  / /_/ / __/ / /_/ / __/ / /| | / /
+    // / _, _/ /___/ ____/ /___/ ___ |/ /
+    ///_/ |_/_____/_/   /_____/_/  |_/_/
 
     /**
      * how often you want to repeat the Structure
@@ -58,89 +139,21 @@ sealed class WallStructure:Serializable
     /**
      * The Gap between each Repeat
      */
-    var repeatGap: Int = 1
+    var repeatAddZ: Double = 1.0
 
     /**
      * shifts each repeat in x
      */
-    var repeatShiftX: Double = 0.0
-
+    var repeatAddX: Double = 0.0
 
     /**
      * shifts each repeated Structure in y
      */
-    var repeatShiftY: Double = 0.0
+    var repeatAddY: Double = 0.0
 
-    fun walls(): ArrayList<Wall> {
-        repeat()
-        run()
-        adjustValues()
-        mirror()
-        return walls
-    }
+    //todo add repeatPath
 
-    private fun mirror(){
-        var otherWalls: ArrayList<Wall> = arrayListOf()
-         when(mirror){
-             1->walls.forEach { it.mirror() }
-             2-> {otherWalls = copyWalls();walls.forEach { it.mirror() }}
-             3->walls.forEach {it.verticalMirror()}
-             4-> {otherWalls = copyWalls();walls.forEach { it.verticalMirror() }}
-             5->walls.forEach {it.pointMirror()}
-             6-> {otherWalls = copyWalls();walls.forEach { it.pointMirror() }}
-             7-> {otherWalls = copyWalls()
-                 walls.forEach { it.verticalMirror() }
-                 walls.addAll(otherWalls)
-                 otherWalls =copyWalls()
-                 walls.forEach { it.mirror()}}
-             8-> {otherWalls =copyWalls()
-                 walls.forEach { it.pointMirror() }
-                 walls.addAll(otherWalls)
-                 otherWalls = copyWalls()
-                 walls.forEach { it.mirror()}}
-        }
-        walls.addAll(otherWalls)
-    }
-
-    private fun repeat(){
-        val tempWalls  = arrayListOf<Wall>()
-        for (i in 1 until repeat){
-            val temp = this.deepCopy()
-            temp.run()
-            temp.walls.forEach {
-                it.startTime+=repeatGap*i
-                it.startRow += repeatShiftX*i
-                it.startHeight += repeatShiftY*i
-            }
-            tempWalls.addAll(temp.walls)
-        }
-        add(tempWalls)
-    }
-
-    private fun copyWalls() :ArrayList<Wall> = ArrayList((walls.map { it.copy() }))
-
-    private fun adjustValues(){
-        if (changeDuration!=null)
-            walls.forEach { it.duration = changeDuration as Double }
-    }
-
-
-    protected open fun run(){}
-    fun add(w:Wall){
-        walls.add(w)
-    }
-    fun add(w:Collection<Wall>){
-        walls.addAll(w)
-    }
-    fun deepCopy():WallStructure = deepCopyBySer(this)
-
-    /**
-     * generated Funktions
-     */
-
-    override fun toString(): String {
-        return "WallStructure(walls=$walls, beat=$beat, mirror=$mirror, time=$time, changeDuration=$changeDuration, repeat=$repeat, repeatGap=$repeatGap, repeatShiftX=$repeatShiftX, repeatShiftY=$repeatShiftY)"
-    }
+    open fun run(){}
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -148,52 +161,74 @@ sealed class WallStructure:Serializable
 
         other as WallStructure
 
-        if (walls != other.walls) return false
+        if (spookyWalls != other.spookyWalls) return false
         if (beat != other.beat) return false
         if (mirror != other.mirror) return false
         if (time != other.time) return false
+        if (changeStartTime != other.changeStartTime) return false
         if (changeDuration != other.changeDuration) return false
+        if (changeHeight != other.changeHeight) return false
+        if (changeStartHeight != other.changeStartHeight) return false
+        if (changeStartRow != other.changeStartRow) return false
+        if (changeWidth != other.changeWidth) return false
+        if (scaleStartTime != other.scaleStartTime) return false
+        if (scaleDuration != other.scaleDuration) return false
+        if (scaleHeight != other.scaleHeight) return false
+        if (scaleStartHeight != other.scaleStartHeight) return false
+        if (scaleStartRow != other.scaleStartRow) return false
+        if (scaleWidth != other.scaleWidth) return false
+        if (addStartTime != other.addStartTime) return false
+        if (addDuration != other.addDuration) return false
+        if (addHeight != other.addHeight) return false
+        if (addStartHeight != other.addStartHeight) return false
+        if (addStartRow != other.addStartRow) return false
+        if (addWidth != other.addWidth) return false
+        if (scale != other.scale) return false
         if (repeat != other.repeat) return false
-        if (repeatGap != other.repeatGap) return false
-        if (repeatShiftX != other.repeatShiftX) return false
-        if (repeatShiftY != other.repeatShiftY) return false
+        if (repeatAddZ != other.repeatAddZ) return false
+        if (repeatAddX != other.repeatAddX) return false
+        if (repeatAddY != other.repeatAddY) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        var result = walls.hashCode()
+        var result = spookyWalls.hashCode()
         result = 31 * result + beat.hashCode()
         result = 31 * result + mirror
         result = 31 * result + time.hashCode()
+        result = 31 * result + (changeStartTime?.hashCode() ?: 0)
         result = 31 * result + (changeDuration?.hashCode() ?: 0)
+        result = 31 * result + (changeHeight?.hashCode() ?: 0)
+        result = 31 * result + (changeStartHeight?.hashCode() ?: 0)
+        result = 31 * result + (changeStartRow?.hashCode() ?: 0)
+        result = 31 * result + (changeWidth?.hashCode() ?: 0)
+        result = 31 * result + (scaleStartTime?.hashCode() ?: 0)
+        result = 31 * result + (scaleDuration?.hashCode() ?: 0)
+        result = 31 * result + (scaleHeight?.hashCode() ?: 0)
+        result = 31 * result + (scaleStartHeight?.hashCode() ?: 0)
+        result = 31 * result + (scaleStartRow?.hashCode() ?: 0)
+        result = 31 * result + (scaleWidth?.hashCode() ?: 0)
+        result = 31 * result + (addStartTime?.hashCode() ?: 0)
+        result = 31 * result + (addDuration?.hashCode() ?: 0)
+        result = 31 * result + (addHeight?.hashCode() ?: 0)
+        result = 31 * result + (addStartHeight?.hashCode() ?: 0)
+        result = 31 * result + (addStartRow?.hashCode() ?: 0)
+        result = 31 * result + (addWidth?.hashCode() ?: 0)
+        result = 31 * result + (scale?.hashCode() ?: 0)
         result = 31 * result + repeat
-        result = 31 * result + repeatGap
-        result = 31 * result + repeatShiftX.hashCode()
-        result = 31 * result + repeatShiftY.hashCode()
+        result = 31 * result + repeatAddZ.hashCode()
+        result = 31 * result + repeatAddX.hashCode()
+        result = 31 * result + repeatAddY.hashCode()
         return result
     }
 }
 
-/**
- * workaround for deep copy
- */
-private fun <T : Serializable> deepCopyBySer(obj: T): T {
-    val baos = ByteArrayOutputStream()
-    val oos  = ObjectOutputStream(baos)
-    oos.writeObject(obj)
-    oos.close()
-    val bais = ByteArrayInputStream(baos.toByteArray())
-    val ois  = ObjectInputStream(bais)
-    @Suppress("unchecked_cast")
-    return ois.readObject() as T
-}
+
 
 class CustomWallStructure(val name:String): WallStructure()
 
-object EmptyWallStructure:WallStructure(){
-}
-
+object EmptyWallStructure:WallStructure()
 
 //   _____                 _       __   _       __      _________ __                  __
 //  / ___/____  ___  _____(_)___ _/ /  | |     / /___ _/ / / ___// /________  _______/ /___  __________  _____
@@ -204,20 +239,41 @@ object EmptyWallStructure:WallStructure(){
 
 class TestWallStructure(val test:Boolean = false): WallStructure()
 
+/**
+ * Random Noise (small mini cubes)
+ */
 class RandomNoise:WallStructure(){
     /**
      * the amount of the created Walls
      */
     var amount: Int  = 10
+
+    /**
+     * controls one corner of the Area
+     */
+    var sp = Point(-6,0,0)
+
+    /**
+     * controls the other corner of the Area
+     */
+    var ep = Point(6,5,1)
+
+
     override fun run() {
+        val sx = min(sp.x,ep.x)
+        val ex = max(sp.x,ep.x)
+        val sy = min(sp.y,ep.y)
+        val ey = max(sp.y,ep.y)
+        val sz = min(sp.z,ep.z)
+        val ez = max(sp.z,ep.z)
         repeat(amount){
-            val w = Wall(
-                startRow = Random.nextDouble(-6.0,6.0),
+            val w = SpookyWall(
+                startRow = Random.nextDouble(sx,ex),
                 duration = 0.0,
                 width = 0.0,
                 height = 0.0,
-                startHeight = Random.nextDouble(5.0),
-                startTime = it.toDouble()/amount
+                startHeight = Random.nextDouble(sy,ey),
+                startTime = sz + (it.toDouble()/amount * (ez-sz))
             )
             add(w)
         }
@@ -231,25 +287,25 @@ class Curve:WallStructure(){
     /**
      * the start Point of the Curve
      */
-    var sp: Point = Point(0,0,0)
+    var p1: Point = Point(0,0,0)
+    /**
+     * the first Controllpoint, defaults to the startPoint
+     */
+    var p2: Point? = null
+    /**
+     * second ControlPoint, defaults to the end point
+     */
+    var p3: Point? = null
     /**
      * The EndPoint of the Curve
      */
-    var ep: Point = Point(0,0,0)
-    /**
-     * the first Controllpoint
-     */
-    var cp1: Point = sp.copy()
-    /**
-     * second ControlPoint
-     */
-    var cp2: Point = ep.copy()
+    var p4: Point = Point(0,0,0)
     /**
      * amount of Walls
      */
     var amount: Int = 8
     override fun run() {
-        add(curve(sp,cp1,cp2,ep,amount))
+        add(curve(p1, p2?:p1,p3?: p4, p4,amount))
     }
 }
 
@@ -285,11 +341,41 @@ class Define: WallStructure() {
      */
     var structures: List<WallStructure> = listOf()
 
+    /**
+     * dont touch
+     */
+    var isTopLevel = false
+
     override fun run() {
-        add(structures.flatMap { it.walls() })
+        for(w in structures){
+            val l = w.walls()
+            l.forEach { it.startTime+=w.beat }
+            add(l)
+        }
     }
 }
 
+/**
+ * Defines a Single Wall
+ */
+class Wall: WallStructure() {
+    var startTime = 0.0
+    var duration = 1.0
+    var startHeight = 0.0
+    var height = 0.0
+    var startRow = 0.0
+    var width = 0.0
+
+    override fun run() {
+        add(SpookyWall(
+            startRow = startRow,
+            duration = duration,
+            width = width,
+            height = height,
+            startHeight = startHeight,
+            startTime = startTime
+        ))
+    }
 /**
  * Draws a wall of line between the 2 provided Points
  */
@@ -340,3 +426,6 @@ fun main (){
     println(w.walls().first().startRow)
     println(w2.walls().first().startRow)
 }
+
+//todo add text
+//todo add more random stuff
