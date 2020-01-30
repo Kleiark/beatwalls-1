@@ -1,0 +1,134 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Define - beatwalls</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">beatwalls</a>&nbsp;/&nbsp;<a href="../index.html">structure</a>&nbsp;/&nbsp;<a href="./index.html">Define</a><br/>
+<br/>
+<h1>Define</h1>
+<code><span class="keyword">class </span><span class="identifier">Define</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code>
+<p>Define your own WallStructure from existing WallStructures.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>Define your own WallStructure from existing WallStructures.</p>
+<code><span class="identifier">Define</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="is-top-level.html">isTopLevel</a></h4>
+</td>
+<td>
+<p>dont touch</p>
+<code><span class="keyword">var </span><span class="identifier">isTopLevel</span><span class="symbol">: </span><span class="identifier">Boolean</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="name.html">name</a></h4>
+</td>
+<td>
+<p>the name the structure gets saved to</p>
+<code><span class="keyword">var </span><span class="identifier">name</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="structures.html">structures</a></h4>
+</td>
+<td>
+<p>The name of Different Structures. Separated by comma (example: structures: Floor, Ceiling)
+You can also define Parameters of the first Structure
+These get loaded in Order, So if your reference defined Structures, those must be listed before that
+The Beat Value gets every time, so it should be 0 most of the time</p>
+<code><span class="keyword">var </span><span class="identifier">structures</span><span class="symbol">: </span><span class="identifier">List</span><span class="symbol">&lt;</span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="run.html">run</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">run</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="../add.html">add</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">add</span><span class="symbol">(</span><span class="identifier" id="structure$add(structure.WallStructure, kotlin.collections.Collection((structure.SpookyWall)))/w">w</span><span class="symbol">:</span>&nbsp;<span class="identifier">Collection</span><span class="symbol">&lt;</span><a href="../-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code><br/>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">add</span><span class="symbol">(</span><span class="identifier" id="structure$add(structure.WallStructure, structure.SpookyWall)/w">w</span><span class="symbol">:</span>&nbsp;<a href="../-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../adjust.html">adjust</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">adjust</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../copy-walls.html">copyWalls</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">copyWalls</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ArrayList</span><span class="symbol">&lt;</span><a href="../-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../deep-copy.html">deepCopy</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">deepCopy</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../mirror.html">mirror</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">mirror</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../read-point.html">readPoint</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">readPoint</span><span class="symbol">(</span><span class="identifier" id="structure$readPoint(structure.WallStructure, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-point/index.html"><span class="identifier">Point</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../repeat.html">repeat</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">repeat</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../walls.html">walls</a></h4>
+</td>
+<td>
+<p>this is for getting the acutal Walls</p>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">walls</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ArrayList</span><span class="symbol">&lt;</span><a href="../-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

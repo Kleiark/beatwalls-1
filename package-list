@@ -1,0 +1,18 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:assetFile$key(kotlin.Pair((kotlin.String, )))asset-file/kotlin.-pair/key.html
+$dokka.location:assetFile$value(kotlin.Pair((kotlin.String, )))asset-file/kotlin.-pair/value.html
+$dokka.location:com.github.spookyghost.beatwalls$asWatchChannel(java.io.File, com.github.spookyghost.beatwalls.KWatchChannel.Mode, kotlin.Any, kotlinx.coroutines.CoroutineScope)com.github.spookyghost.beatwalls/java.io.-file/as-watch-channel.html
+$dokka.location:song$isSong(java.io.File)song/java.io.-file/is-song.html
+$dokka.location:structure$getBooleanOrElse(java.util.ArrayList((kotlin.String)), kotlin.Int, kotlin.Boolean)structure/java.util.-array-list/get-boolean-or-else.html
+$dokka.location:structure$getDoubleOrElse(java.util.ArrayList((kotlin.String)), kotlin.Int, kotlin.Double)structure/java.util.-array-list/get-double-or-else.html
+$dokka.location:structure$getIntOrElse(java.util.ArrayList((kotlin.String)), kotlin.Int, kotlin.Int)structure/java.util.-array-list/get-int-or-else.html
+$dokka.location:structure$reverseX(java.util.ArrayList((structure.SpookyWall)))structure/java.util.-array-list/reverse-x.html
+$dokka.location:structure$reverseY(java.util.ArrayList((structure.SpookyWall)))structure/java.util.-array-list/reverse-y.html
+$dokka.location:structure$toPoint(kotlin.Triple((kotlin.Double, , )))structure/kotlin.-triple/to-point.html
+assetFile
+com.github.spookyghost.beatwalls
+difficulty
+old_structures
+song
+structure

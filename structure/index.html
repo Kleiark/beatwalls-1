@@ -1,0 +1,313 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>structure - beatwalls</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">beatwalls</a>&nbsp;/&nbsp;<a href="./index.html">structure</a><br/>
+<br/>
+<h2>Package structure</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-continues-curve/index.html">ContinuesCurve</a></h4>
+</td>
+<td>
+<p>Creates a continues line with up to 31 Points. has a typo and will be deleted on version 1.0</p>
+<code><span class="keyword">class </span><s><span class="identifier">ContinuesCurve</span></s>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-continuous-curve/index.html">ContinuousCurve</a></h4>
+</td>
+<td>
+<p>Creates a continues line with up to 31 Points. this one does not have a typo in the name :)</p>
+<code><span class="keyword">class </span><span class="identifier">ContinuousCurve</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-cuboid-constrains/index.html">CuboidConstrains</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">CuboidConstrains</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-curve/index.html">Curve</a></h4>
+</td>
+<td>
+<p>Draw a curve of Walls. This uses BezierCurve. You can imagine it like a line between point 1 and point 4, that gets pulled upon by the controlpoints. Maybe this link can help (the dots are the Points) https://www.desmos.com/calculator/cahqdxeshd</p>
+<code><span class="keyword">class </span><span class="identifier">Curve</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-define/index.html">Define</a></h4>
+</td>
+<td>
+<p>Define your own WallStructure from existing WallStructures.</p>
+<code><span class="keyword">class </span><span class="identifier">Define</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-empty-wall-structure.html">EmptyWallStructure</a></h4>
+</td>
+<td>
+<p>dont touch</p>
+<code><span class="keyword">object </span><span class="identifier">EmptyWallStructure</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-furry-grid/index.html">FurryGrid</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">FurryGrid</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-helix/index.html">Helix</a></h4>
+</td>
+<td>
+<p>spinning time! make walls spin around the player</p>
+<code><span class="keyword">class </span><span class="identifier">Helix</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-helix-curve/index.html">HelixCurve</a></h4>
+</td>
+<td>
+<p>Helix Curve lets you define 1/4 of a curve around the center. The program creates the rest of the helix</p>
+<code><span class="keyword">class </span><span class="identifier">HelixCurve</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-line/index.html">Line</a></h4>
+</td>
+<td>
+<p>Draws a wall of line between the 2 provided Points</p>
+<code><span class="keyword">class </span><span class="identifier">Line</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-loop/index.html">Loop</a></h4>
+</td>
+<td>
+<p>loops throuh the given wallstructures and increments their values</p>
+<code><span class="keyword">class </span><span class="identifier">Loop</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-point/index.html">Point</a></h4>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Point</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Serializable</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-random-blocks/index.html">RandomBlocks</a></h4>
+</td>
+<td>
+<p>place random blocks around the player</p>
+<code><span class="keyword">class </span><span class="identifier">RandomBlocks</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-random-cuboid-lines/index.html">RandomCuboidLines</a></h4>
+</td>
+<td>
+<p>draws multiple lines around Sections of the cuboid.</p>
+<code><span class="keyword">class </span><span class="identifier">RandomCuboidLines</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-random-curve/index.html">RandomCurve</a></h4>
+</td>
+<td>
+<p>random curves in a given cubic. Always starts at p1 and ends at p2.</p>
+<code><span class="keyword">class </span><span class="identifier">RandomCurve</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-random-noise/index.html">RandomNoise</a></h4>
+</td>
+<td>
+<p>Random Noise (small mini cubes)</p>
+<code><span class="keyword">class </span><span class="identifier">RandomNoise</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-spooky-wall/index.html">SpookyWall</a></h4>
+</td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">SpookyWall</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Serializable</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-steady-curve/index.html">SteadyCurve</a></h4>
+</td>
+<td>
+<p>Draw a steady curve of Walls. that is exactly 1 beat long</p>
+<code><span class="keyword">class </span><span class="identifier">SteadyCurve</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-wall/index.html">Wall</a></h4>
+</td>
+<td>
+<p>create a single Wall</p>
+<code><span class="keyword">class </span><span class="identifier">Wall</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-wall-structure/index.html">WallStructure</a></h4>
+</td>
+<td>
+<code><span class="keyword">sealed</span> <span class="keyword">class </span><span class="identifier">WallStructure</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Serializable</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extensions for External Classes</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="java.util.-array-list/index.html">java.util.ArrayList</a></h4>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<h4><a href="kotlin.-triple/index.html">kotlin.Triple</a></h4>
+</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="add.html">add</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">add</span><span class="symbol">(</span><span class="identifier" id="structure$add(structure.WallStructure, kotlin.collections.Collection((structure.SpookyWall)))/w">w</span><span class="symbol">:</span>&nbsp;<span class="identifier">Collection</span><span class="symbol">&lt;</span><a href="-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code><br/>
+<code><span class="keyword">fun </span><a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">add</span><span class="symbol">(</span><span class="identifier" id="structure$add(structure.WallStructure, structure.SpookyWall)/w">w</span><span class="symbol">:</span>&nbsp;<a href="-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="adjust.html">adjust</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">adjust</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="calc-p3.html">calcP3</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">calcP3</span><span class="symbol">(</span><span class="identifier" id="structure$calcP3(structure.Point, structure.Point, structure.Point, structure.Point)/point">point</span><span class="symbol">:</span>&nbsp;<a href="-point/index.html"><span class="identifier">Point</span></a><span class="symbol">, </span><span class="identifier" id="structure$calcP3(structure.Point, structure.Point, structure.Point, structure.Point)/nextPoint">nextPoint</span><span class="symbol">:</span>&nbsp;<a href="-point/index.html"><span class="identifier">Point</span></a><span class="symbol">, </span><span class="identifier" id="structure$calcP3(structure.Point, structure.Point, structure.Point, structure.Point)/nextControlPoint">nextControlPoint</span><span class="symbol">:</span>&nbsp;<a href="-point/index.html"><span class="identifier">Point</span></a><span class="symbol">, </span><span class="identifier" id="structure$calcP3(structure.Point, structure.Point, structure.Point, structure.Point)/nextNextPoint">nextNextPoint</span><span class="symbol">:</span>&nbsp;<a href="-point/index.html"><span class="identifier">Point</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="-point/index.html"><span class="identifier">Point</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="circle.html">circle</a></h4>
+</td>
+<td>
+<p>A function to getSpookyWallList a circle of walls or a helix, probably should have splitted those up</p>
+<code><span class="keyword">fun </span><span class="identifier">circle</span><span class="symbol">(</span><span class="identifier" id="structure$circle(kotlin.Int, kotlin.Double, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Boolean, kotlin.Boolean)/count">count</span><span class="symbol">:</span>&nbsp;<span class="identifier">Int</span>&nbsp;<span class="symbol">=</span>&nbsp;1<span class="symbol">, </span><span class="identifier" id="structure$circle(kotlin.Int, kotlin.Double, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Boolean, kotlin.Boolean)/radius">radius</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span>&nbsp;<span class="symbol">=</span>&nbsp;1.9<span class="symbol">, </span><span class="identifier" id="structure$circle(kotlin.Int, kotlin.Double, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Boolean, kotlin.Boolean)/fineTuning">fineTuning</span><span class="symbol">:</span>&nbsp;<span class="identifier">Int</span>&nbsp;<span class="symbol">=</span>&nbsp;10<span class="symbol">, </span><span class="identifier" id="structure$circle(kotlin.Int, kotlin.Double, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Boolean, kotlin.Boolean)/startRotation">startRotation</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span>&nbsp;<span class="symbol">=</span>&nbsp;0.0<span class="symbol">, </span><span class="identifier" id="structure$circle(kotlin.Int, kotlin.Double, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Boolean, kotlin.Boolean)/rotationCount">rotationCount</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span>&nbsp;<span class="symbol">=</span>&nbsp;1.0<span class="symbol">, </span><span class="identifier" id="structure$circle(kotlin.Int, kotlin.Double, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Boolean, kotlin.Boolean)/heightOffset">heightOffset</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span>&nbsp;<span class="symbol">=</span>&nbsp;2.0<span class="symbol">, </span><span class="identifier" id="structure$circle(kotlin.Int, kotlin.Double, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Boolean, kotlin.Boolean)/startRowOffset">startRowOffset</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span>&nbsp;<span class="symbol">=</span>&nbsp;0.0<span class="symbol">, </span><span class="identifier" id="structure$circle(kotlin.Int, kotlin.Double, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Boolean, kotlin.Boolean)/speedChange">speedChange</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="structure$circle(kotlin.Int, kotlin.Double, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Boolean, kotlin.Boolean)/wallDuration">wallDuration</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="structure$circle(kotlin.Int, kotlin.Double, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Boolean, kotlin.Boolean)/helix">helix</span><span class="symbol">:</span>&nbsp;<span class="identifier">Boolean</span>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">, </span><span class="identifier" id="structure$circle(kotlin.Int, kotlin.Double, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Boolean, kotlin.Boolean)/reverse">reverse</span><span class="symbol">:</span>&nbsp;<span class="identifier">Boolean</span>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ArrayList</span><span class="symbol">&lt;</span><a href="-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="copy-walls.html">copyWalls</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">copyWalls</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ArrayList</span><span class="symbol">&lt;</span><a href="-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="curve.html">curve</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">curve</span><span class="symbol">(</span><span class="identifier" id="structure$curve(structure.Point, structure.Point, structure.Point, structure.Point, kotlin.Int)/startPoint">startPoint</span><span class="symbol">:</span>&nbsp;<a href="-point/index.html"><span class="identifier">Point</span></a><span class="symbol">, </span><span class="identifier" id="structure$curve(structure.Point, structure.Point, structure.Point, structure.Point, kotlin.Int)/p1">p1</span><span class="symbol">:</span>&nbsp;<a href="-point/index.html"><span class="identifier">Point</span></a><span class="symbol">, </span><span class="identifier" id="structure$curve(structure.Point, structure.Point, structure.Point, structure.Point, kotlin.Int)/p2">p2</span><span class="symbol">:</span>&nbsp;<a href="-point/index.html"><span class="identifier">Point</span></a><span class="symbol">, </span><span class="identifier" id="structure$curve(structure.Point, structure.Point, structure.Point, structure.Point, kotlin.Int)/endPoint">endPoint</span><span class="symbol">:</span>&nbsp;<a href="-point/index.html"><span class="identifier">Point</span></a><span class="symbol">, </span><span class="identifier" id="structure$curve(structure.Point, structure.Point, structure.Point, structure.Point, kotlin.Int)/amount">amount</span><span class="symbol">:</span>&nbsp;<span class="identifier">Int</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ArrayList</span><span class="symbol">&lt;</span><a href="-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="deep-copy.html">deepCopy</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">deepCopy</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="generate-properties.html">generateProperties</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="-continues-curve/index.html"><span class="identifier">ContinuesCurve</span></a><span class="symbol">.</span><span class="identifier">generateProperties</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-box-list.html">getBoxList</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getBoxList</span><span class="symbol">(</span><span class="identifier" id="structure$getBoxList(kotlin.Int)/wallAmountPerWall">wallAmountPerWall</span><span class="symbol">:</span>&nbsp;<span class="identifier">Int</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ArrayList</span><span class="symbol">&lt;</span><a href="-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="line.html">line</a></h4>
+</td>
+<td>
+<p>Draws a line between 2 coordinates</p>
+<code><span class="keyword">fun </span><span class="identifier">line</span><span class="symbol">(</span><span class="identifier" id="structure$line(kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.Double)/px1">px1</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span><span class="symbol">, </span><span class="identifier" id="structure$line(kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.Double)/py1">py1</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span><span class="symbol">, </span><span class="identifier" id="structure$line(kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.Double)/pz1">pz1</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span>&nbsp;<span class="symbol">=</span>&nbsp;0.0<span class="symbol">, </span><span class="identifier" id="structure$line(kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.Double)/px2">px2</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span><span class="symbol">, </span><span class="identifier" id="structure$line(kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.Double)/py2">py2</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span><span class="symbol">, </span><span class="identifier" id="structure$line(kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.Double)/pz2">pz2</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span>&nbsp;<span class="symbol">=</span>&nbsp;0.0<span class="symbol">, </span><span class="identifier" id="structure$line(kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.Double)/defaultAmount">defaultAmount</span><span class="symbol">:</span>&nbsp;<span class="identifier">Int</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="structure$line(kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.Double)/defaultDuration">defaultDuration</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ArrayList</span><span class="symbol">&lt;</span><a href="-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">&gt;</span></code><code><span class="keyword">fun </span><span class="identifier">line</span><span class="symbol">(</span><span class="identifier" id="structure$line(structure.Point, structure.Point, kotlin.Int)/p0">p0</span><span class="symbol">:</span>&nbsp;<a href="-point/index.html"><span class="identifier">Point</span></a><span class="symbol">, </span><span class="identifier" id="structure$line(structure.Point, structure.Point, kotlin.Int)/p1">p1</span><span class="symbol">:</span>&nbsp;<a href="-point/index.html"><span class="identifier">Point</span></a><span class="symbol">, </span><span class="identifier" id="structure$line(structure.Point, structure.Point, kotlin.Int)/amount">amount</span><span class="symbol">:</span>&nbsp;<span class="identifier">Int</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ArrayList</span><span class="symbol">&lt;</span><a href="-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">&gt;</span></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">line</span><span class="symbol">(</span><span class="identifier" id="structure$line(kotlin.Triple((kotlin.Double, , )), kotlin.Triple((kotlin.Double, , )), kotlin.Int)/p0">p0</span><span class="symbol">:</span>&nbsp;<span class="identifier">Triple</span><span class="symbol">&lt;</span><span class="identifier">Double</span><span class="symbol">,</span>&nbsp;<span class="identifier">Double</span><span class="symbol">,</span>&nbsp;<span class="identifier">Double</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="structure$line(kotlin.Triple((kotlin.Double, , )), kotlin.Triple((kotlin.Double, , )), kotlin.Int)/p1">p1</span><span class="symbol">:</span>&nbsp;<span class="identifier">Triple</span><span class="symbol">&lt;</span><span class="identifier">Double</span><span class="symbol">,</span>&nbsp;<span class="identifier">Double</span><span class="symbol">,</span>&nbsp;<span class="identifier">Double</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="structure$line(kotlin.Triple((kotlin.Double, , )), kotlin.Triple((kotlin.Double, , )), kotlin.Int)/amount">amount</span><span class="symbol">:</span>&nbsp;<span class="identifier">Int</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ArrayList</span><span class="symbol">&lt;</span><a href="-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="mirror.html">mirror</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">mirror</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="quadratic-bezier.html">quadraticBezier</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">quadraticBezier</span><span class="symbol">(</span><span class="identifier" id="structure$quadraticBezier(structure.Point, structure.Point, structure.Point, structure.Point, kotlin.Double)/p0">p0</span><span class="symbol">:</span>&nbsp;<a href="-point/index.html"><span class="identifier">Point</span></a><span class="symbol">, </span><span class="identifier" id="structure$quadraticBezier(structure.Point, structure.Point, structure.Point, structure.Point, kotlin.Double)/p1">p1</span><span class="symbol">:</span>&nbsp;<a href="-point/index.html"><span class="identifier">Point</span></a><span class="symbol">, </span><span class="identifier" id="structure$quadraticBezier(structure.Point, structure.Point, structure.Point, structure.Point, kotlin.Double)/p2">p2</span><span class="symbol">:</span>&nbsp;<a href="-point/index.html"><span class="identifier">Point</span></a><span class="symbol">, </span><span class="identifier" id="structure$quadraticBezier(structure.Point, structure.Point, structure.Point, structure.Point, kotlin.Double)/p3">p3</span><span class="symbol">:</span>&nbsp;<a href="-point/index.html"><span class="identifier">Point</span></a><span class="symbol">, </span><span class="identifier" id="structure$quadraticBezier(structure.Point, structure.Point, structure.Point, structure.Point, kotlin.Double)/t">t</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span><span class="symbol">)</span><span class="symbol">: </span><a href="-point/index.html"><span class="identifier">Point</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="random-point.html">randomPoint</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">randomPoint</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="-point/index.html"><span class="identifier">Point</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="read-point.html">readPoint</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">readPoint</span><span class="symbol">(</span><span class="identifier" id="structure$readPoint(structure.WallStructure, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">)</span><span class="symbol">: </span><a href="-point/index.html"><span class="identifier">Point</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="repeat.html">repeat</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">repeat</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="walls.html">walls</a></h4>
+</td>
+<td>
+<p>this is for getting the acutal Walls</p>
+<code><span class="keyword">fun </span><a href="-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">walls</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ArrayList</span><span class="symbol">&lt;</span><a href="-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

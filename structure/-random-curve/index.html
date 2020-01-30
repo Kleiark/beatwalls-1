@@ -1,0 +1,131 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>RandomCurve - beatwalls</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">beatwalls</a>&nbsp;/&nbsp;<a href="../index.html">structure</a>&nbsp;/&nbsp;<a href="./index.html">RandomCurve</a><br/>
+<br/>
+<h1>RandomCurve</h1>
+<code><span class="keyword">class </span><span class="identifier">RandomCurve</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code>
+<p>random curves in a given cubic. Always starts at p1 and ends at p2.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<p>random curves in a given cubic. Always starts at p1 and ends at p2.</p>
+<code><span class="identifier">RandomCurve</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="amount.html">amount</a></h4>
+</td>
+<td>
+<p>the amount of Walls per beat</p>
+<code><span class="keyword">var </span><span class="identifier">amount</span><span class="symbol">: </span><span class="identifier">Int</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="p1.html">p1</a></h4>
+</td>
+<td>
+<p>first Point that controls the cubic, in which section walls are created. defaults to a random side</p>
+<code><span class="keyword">var </span><span class="identifier">p1</span><span class="symbol">: </span><a href="../-point/index.html"><span class="identifier">Point</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="p2.html">p2</a></h4>
+</td>
+<td>
+<p>second Point that crontrols in which section walls are created. z must be higher than p1</p>
+<code><span class="keyword">var </span><span class="identifier">p2</span><span class="symbol">: </span><a href="../-point/index.html"><span class="identifier">Point</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="run.html">run</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">run</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="../add.html">add</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">add</span><span class="symbol">(</span><span class="identifier" id="structure$add(structure.WallStructure, kotlin.collections.Collection((structure.SpookyWall)))/w">w</span><span class="symbol">:</span>&nbsp;<span class="identifier">Collection</span><span class="symbol">&lt;</span><a href="../-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code><br/>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">add</span><span class="symbol">(</span><span class="identifier" id="structure$add(structure.WallStructure, structure.SpookyWall)/w">w</span><span class="symbol">:</span>&nbsp;<a href="../-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../adjust.html">adjust</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">adjust</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../copy-walls.html">copyWalls</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">copyWalls</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ArrayList</span><span class="symbol">&lt;</span><a href="../-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../deep-copy.html">deepCopy</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">deepCopy</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../mirror.html">mirror</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">mirror</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../read-point.html">readPoint</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">readPoint</span><span class="symbol">(</span><span class="identifier" id="structure$readPoint(structure.WallStructure, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-point/index.html"><span class="identifier">Point</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../repeat.html">repeat</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">repeat</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="../walls.html">walls</a></h4>
+</td>
+<td>
+<p>this is for getting the acutal Walls</p>
+<code><span class="keyword">fun </span><a href="../-wall-structure/index.html"><span class="identifier">WallStructure</span></a><span class="symbol">.</span><span class="identifier">walls</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ArrayList</span><span class="symbol">&lt;</span><a href="../-spooky-wall/index.html"><span class="identifier">SpookyWall</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
